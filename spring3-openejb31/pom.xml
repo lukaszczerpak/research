@@ -12,6 +12,41 @@
     </build>
 
     <dependencies>
+        <!-- VAADIN -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>6.5.3</version>
+        </dependency>
+
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>3.0.5.RELEASE</version>
+        </dependency>
+
+        <!-- OPENEJB -->
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-core</artifactId>
@@ -19,6 +54,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- SPRING & OPENEJB INTEGRATION -->
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-spring</artifactId>
@@ -31,6 +67,7 @@
             </exclusions>
         </dependency>
 
+        <!-- TESTING -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
