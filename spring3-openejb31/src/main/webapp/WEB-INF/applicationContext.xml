@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<util:beans xmlns:util="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jee="http://www.springframework.org/schema/jee"
@@ -7,23 +7,22 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
 
-    <bean name="TransactionManager" class="org.apache.geronimo.transaction.manager.GeronimoTransactionManager"/>
-    <bean name="SecurityService" class="org.apache.openejb.core.security.SecurityServiceImpl"/>
-    <bean name="classPathApplication" class="org.apache.openejb.spring.ClassPathApplication"/>
+    <context:annotation-config/>
+
+    <util:bean name="TransactionManager" class="org.apache.geronimo.transaction.manager.GeronimoTransactionManager"/>
+    <util:bean name="SecurityService" class="org.apache.openejb.core.security.SecurityServiceImpl"/>
+    <util:bean name="classPathApplication" class="org.apache.openejb.spring.ClassPathApplication"/>
 
     <!-- Turn on annotation based configuration, etc. -->
     <context:property-placeholder location="classpath*:*.properties"/>
-
     <!-- Use annotations to configure our components -->
-<!--
     <context:component-scan base-package="eu.czerpak.vaadin"/>
--->
-    <context:component-scan base-package="eu.czerpak"/>
 
-    <context:annotation-config/>
+    <util:bean id="jndiConfiguration"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <util:property name="location" value="/WEB-INF/jndi.properties"/>
+    </util:bean>
 
+    <jee:jndi-lookup id="SimpleEjb" jndi-name="SimpleEjbLocalBean" environment-ref="jndiConfiguration"/>
 
-<!--
-    <jee:jndi-lookup id="simpleEjb" jndi-name="SimpleEjb"/>
--->
-</beans>
+</util:beans>

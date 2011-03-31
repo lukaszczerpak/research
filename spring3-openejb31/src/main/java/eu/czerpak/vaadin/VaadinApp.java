@@ -15,7 +15,7 @@ public class VaadinApp extends Application
     protected static final String TITLE = "Test App";
 
     @EJB
-    SimpleEjb simpleEjb;
+    SimpleEjb simple;
 
     @Override
     public void init()
@@ -32,7 +32,7 @@ public class VaadinApp extends Application
             @Override
             public void buttonClick(Button.ClickEvent clickEvent)
             {
-                layout.addComponent(new Label(simpleEjb.sayHello("Lukes")));
+                layout.addComponent(new Label(simple.sayHello("Lukes")));
             }
         }));
 

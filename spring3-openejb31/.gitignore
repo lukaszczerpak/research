@@ -1,5 +1,5 @@
 /target
-/*.iml
-/*.iws
-/*.ipr
-/openejb-sample/target
+*.iml
+*.iws
+*.ipr
+/sample-integration/target

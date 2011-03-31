@@ -8,9 +8,9 @@ public class TestEjbLookup extends TestCase
     public void test() throws Exception
     {
         org.apache.log4j.BasicConfigurator.configure();
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/WEB-INF/applicationContext.xml");
 
-        SimpleEjb simpleEjb = (SimpleEjb) context.getBean("SimpleEjb");
-        assertNotNull(simpleEjb);
+        SimpleEjb simple = (SimpleEjb) context.getBean("SimpleEjb");
+        assertNotNull(simple);
     }
 }
