@@ -68,6 +68,7 @@
         </dependency>
 
         <!-- SPRING & OPENEJB INTEGRATION -->
+<!--
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-spring</artifactId>
@@ -79,6 +80,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+-->
 
         <!-- TESTING -->
         <dependency>
