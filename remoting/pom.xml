@@ -21,10 +21,18 @@
         <module>ejb-remote</module>
     </modules>
 
+    <properties>
+        <glassfish.version>3.0.1</glassfish.version>
+    </properties>
+
     <repositories>
         <repository>
             <id>glassfish</id>
             <url>http://download.java.net/maven/glassfish</url>
+        </repository>
+        <repository>
+            <id>java-net</id>
+            <url>http://download.java.net/maven/2</url>
         </repository>
     </repositories>
 
@@ -34,4 +42,43 @@
             <url>http://download.java.net/maven/glassfish</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.appclient</groupId>
+                <artifactId>gf-client</artifactId>
+                <version>${glassfish.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.corba</groupId>
+                <artifactId>glassfish-corba-orb</artifactId>
+                <version>3.0.1-b002</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <version>4.0.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.16</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.perf4j</groupId>
+                <artifactId>perf4j</artifactId>
+                <version>0.9.14</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>eu.czerpak.remoting</groupId>
-        <artifactId>tests</artifactId>
+        <artifactId>remoting-tests</artifactId>
         <version>1.0</version>
     </parent>
 
@@ -21,18 +21,52 @@
     </properties>
 
     <dependencies>
+        <!--
+                <dependency>
+                    <groupId>javax</groupId>
+                    <artifactId>javaee-api</artifactId>
+                    <version>6.0</version>
+                    <scope>provided</scope>
+                </dependency>
+        -->
+
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.corba</groupId>
+            <artifactId>glassfish-corba-orb</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.perf4j</groupId>
+            <artifactId>perf4j</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -95,10 +129,10 @@
                     <configuration>
                         <type>runtime</type>
                         <properties>
-                            <cargo.hostname>192.168.1.11</cargo.hostname>
+                            <cargo.hostname>${glassfish.remote.hostname}</cargo.hostname>
                             <cargo.rmi.port>4848</cargo.rmi.port>
-                            <cargo.remote.username>admin</cargo.remote.username>
-                            <cargo.remote.password>admin</cargo.remote.password>
+                            <cargo.remote.username>${glassfish.remote.username}</cargo.remote.username>
+                            <cargo.remote.password>${glassfish.remote.password}</cargo.remote.password>
                         </properties>
                     </configuration>
                 </configuration>
@@ -106,11 +140,18 @@
                     <dependency>
                         <groupId>org.glassfish.deployment</groupId>
                         <artifactId>deployment-client</artifactId>
-                        <version>3.0.1</version>
+                        <version>${glassfish.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
         </plugins>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
     </build>
 
 </project>

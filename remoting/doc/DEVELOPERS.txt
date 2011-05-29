@@ -1,0 +1,28 @@
+
+WYMAGANIA
+=================================
+
+W ~/.m2/settings.xml zdefiniować properties:
+
+        <glassfish.remote.hostname>192.168.1.11</glassfish.remote.hostname>
+        <glassfish.remote.username>admin</glassfish.remote.username>
+        <glassfish.remote.password>admin</glassfish.remote.password>
+
+np. w profilu aktywowanym zmienną (mvn -Dgf=remoting clean cargo:deploy test):
+
+        <profile>
+            <id>glassfish-remoting</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <glassfish.remote.hostname>192.168.1.11</glassfish.remote.hostname>
+                <glassfish.remote.username>admin</glassfish.remote.username>
+                <glassfish.remote.password>admin</glassfish.remote.password>
+            </properties>
+        </profile>
+
+DEPLOY
+=================================
+
+mvn clean package cargo:deploy -DskipTests -P glassfish-remoting

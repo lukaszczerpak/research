@@ -1,6 +1,9 @@
-package eu.czerpak.ejb;
+package eu.czerpak.service;
+
+import eu.czerpak.model.MyObject;
 
 import javax.ejb.Remote;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,4 +16,5 @@ import javax.ejb.Remote;
 public interface SimpleRemote
 {
     String sayHello(String name);
+    List<MyObject> getMyObjectList(int size);
 }
