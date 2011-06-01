@@ -11,4 +11,22 @@
         <servlet-name>SimpleHessian</servlet-name>
         <url-pattern>/SimpleHessian</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SimpleSessionHessian</servlet-name>
+        <servlet-class>eu.czerpak.servlet.SimpleSessionHessian</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SimpleSessionHessian</servlet-name>
+        <url-pattern>/SimpleSessionHessian</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AuthHessian</servlet-name>
+        <servlet-class>eu.czerpak.servlet.AuthHessian</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthHessian</servlet-name>
+        <url-pattern>/AuthHessian</url-pattern>
+    </servlet-mapping>
 </web-app>

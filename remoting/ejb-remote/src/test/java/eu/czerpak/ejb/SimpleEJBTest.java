@@ -31,8 +31,6 @@ public class SimpleEJBTest
 
         Properties p = new Properties();
         p.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.SerialInitContextFactory");
-//        p.setProperty("java.naming.factory.url.pkgs", "com.sun.enterprise.naming");
-//        p.setProperty("java.naming.factory.state", "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
         p.setProperty("org.omg.CORBA.ORBInitialHost", config.getProperty("glassfish.remote.hostname"));
         p.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
 
