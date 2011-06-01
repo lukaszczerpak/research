@@ -1,10 +1,9 @@
 package eu.czerpak.servlet;
 
 import com.caucho.hessian.server.HessianServlet;
+import eu.czerpak.bean.AuthBean;
 import eu.czerpak.service.Authorization;
-import eu.czerpak.service.SimpleSessionRemote;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 
 /**
@@ -17,23 +16,23 @@ import javax.inject.Inject;
 public class AuthHessian extends HessianServlet implements Authorization
 {
     @Inject
-    Authorization authorization;
+    AuthBean authBean;
 
     @Override
     public void auth(String login, String password)
     {
-        authorization.auth(login, password);
+        authBean.auth(login, password);
     }
 
     @Override
     public String getLogin()
     {
-        return authorization.getLogin();
+        return authBean.getLogin();
     }
 
     @Override
     public boolean isAuthenticated()
     {
-        return authorization.isAuthenticated();
+        return authBean.isAuthenticated();
     }
 }

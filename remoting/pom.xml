@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-        <glassfish.version>3.0.1</glassfish.version>
+        <glassfish.version>3.1</glassfish.version>
     </properties>
 
     <repositories>
@@ -55,11 +55,6 @@
                 <groupId>org.glassfish.appclient</groupId>
                 <artifactId>gf-client</artifactId>
                 <version>${glassfish.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.corba</groupId>
-                <artifactId>glassfish-corba-orb</artifactId>
-                <version>3.0.1-b002</version>
             </dependency>
 
             <dependency>

@@ -33,11 +33,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.corba</groupId>
-            <artifactId>glassfish-corba-orb</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
