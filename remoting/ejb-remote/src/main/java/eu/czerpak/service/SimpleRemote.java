@@ -3,6 +3,7 @@ package eu.czerpak.service;
 import eu.czerpak.model.MyObject;
 
 import javax.ejb.Remote;
+import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Remote
+@WebService
 public interface SimpleRemote
 {
     String sayHello(String name);

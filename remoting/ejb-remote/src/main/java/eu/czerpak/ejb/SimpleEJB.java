@@ -5,6 +5,8 @@ import eu.czerpak.model.MyObjectListHolder;
 import eu.czerpak.service.SimpleRemote;
 
 import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Stateless
+@WebService(endpointInterface = "eu.czerpak.service.SimpleRemote", serviceName = "SimpleEJB")
 public class SimpleEJB implements SimpleRemote
 {
     @Override

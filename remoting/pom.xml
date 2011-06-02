@@ -23,6 +23,7 @@
 
     <properties>
         <glassfish.version>3.1</glassfish.version>
+        <cxf.version>2.4.0</cxf.version>
     </properties>
 
     <repositories>
