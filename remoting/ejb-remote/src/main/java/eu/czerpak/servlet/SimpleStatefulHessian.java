@@ -28,6 +28,20 @@ public class SimpleStatefulHessian extends HessianServlet implements SimpleState
         simpleStatefulRemote.increment();
     }
 
+    @Override
+    public int getValue()
+    {
+        printSessionId();
+        return simpleStatefulRemote.getValue();
+    }
+
+    @Override
+    public void finish()
+    {
+        printSessionId();
+        simpleStatefulRemote.finish();
+    }
+
     private void printSessionId()
     {
         HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
@@ -44,19 +58,5 @@ public class SimpleStatefulHessian extends HessianServlet implements SimpleState
         else {
             System.out.println("NULL REQUEST OBJECT");
         }
-    }
-
-    @Override
-    public int getValue()
-    {
-        printSessionId();
-        return simpleStatefulRemote.getValue();
-    }
-
-    @Override
-    public void finish()
-    {
-        printSessionId();
-        simpleStatefulRemote.finish();
     }
 }
