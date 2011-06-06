@@ -2,10 +2,11 @@ package eu.czerpak.servlet;
 
 import com.caucho.hessian.server.HessianServlet;
 import com.caucho.services.server.ServiceContext;
+import eu.czerpak.ejb.SimpleStatefulEJB;
 import eu.czerpak.ejb.SimpleStatefulRemote;
 
-import javax.ejb.EJB;
-import javax.servlet.ServletRequest;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,45 +19,62 @@ import javax.servlet.http.HttpSession;
  */
 public class SimpleStatefulHessian extends HessianServlet implements SimpleStatefulRemote
 {
-    @EJB
-    SimpleStatefulRemote simpleStatefulRemote;
-
     @Override
     public void increment()
     {
         printSessionId();
-        simpleStatefulRemote.increment();
+        getEJB().increment();
     }
 
     @Override
     public int getValue()
     {
         printSessionId();
-        return simpleStatefulRemote.getValue();
+        return getEJB().getValue();
     }
 
     @Override
     public void finish()
     {
         printSessionId();
-        simpleStatefulRemote.finish();
+        getEJB().finish();
+        getSession().removeAttribute(SimpleStatefulRemote.class.getName());
+    }
+
+    private SimpleStatefulRemote getEJB()
+    {
+
+
+        HttpSession session = getSession();
+        Object o = session.getAttribute(SimpleStatefulRemote.class.getName());
+        if (o == null) {
+            try {
+                InitialContext ic = new InitialContext();
+                o = ic.lookup("java:global/ejb-remote-1.0/" + SimpleStatefulEJB.class.getSimpleName());
+                session.setAttribute(SimpleStatefulRemote.class.getName(), o);
+            }
+            catch (NamingException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+        return (SimpleStatefulRemote) o;
+    }
+
+    private HttpSession getSession()
+    {
+        HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
+        return request.getSession();
     }
 
     private void printSessionId()
     {
-        HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
-        if (request != null) {
-            HttpSession session = request.getSession();
+        HttpSession session = getSession();
 
-            if(session != null) {
-                System.out.println("SESSION: " + session.getId());
-            }
-            else {
-                System.out.println("NULL SESSION OBJECT");
-            }
+        if (session != null) {
+            System.out.println("SESSION: " + session.getId());
         }
         else {
-            System.out.println("NULL REQUEST OBJECT");
+            System.out.println("NO SESSION OBJECT");
         }
     }
 }

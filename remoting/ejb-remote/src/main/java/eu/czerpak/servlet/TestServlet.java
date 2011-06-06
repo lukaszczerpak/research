@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 public class TestServlet extends HttpServlet
 {
     public static final String LOGIN_KEY = "login";
+    private int counter = 0;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +40,7 @@ public class TestServlet extends HttpServlet
             HttpSession session = request.getSession(true);
             out.println("<h1>" + session.getId() + "</h1>");
             out.println("<h1>" + session.getAttribute(LOGIN_KEY) + "</h1>");
+            out.println("<h2>" + counter++ + "</h2>");
         }
         finally {
             out.flush();
