@@ -5,6 +5,7 @@ import eu.czerpak.ejb.SimpleStatefulRemote;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import eu.czerpak.hessian.client.*;
 import javax.naming.NamingException;
 import java.io.IOException;
 import java.net.CookieHandler;
@@ -33,20 +34,23 @@ public class SimpleStatefulHessianTest
         config.load(this.getClass().getResourceAsStream("/test.properties"));
 
         CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
-        HessianProxyFactory factory = new HessianProxyFactory();
+        HessianConversationProxyFactory factory = new HessianConversationProxyFactory();
 
         String url = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleStatefulHessian";
         simpleStatefulRemote = (SimpleStatefulRemote) factory.create(SimpleStatefulRemote.class, url);
         assertNotNull(simpleStatefulRemote);
     }
 
-    @Test
+    @Test(invocationCount = 2)
     public void testStatefulHessian() throws Exception
     {
         assertEquals(simpleStatefulRemote.getValue(), 0);
         simpleStatefulRemote.increment();
         assertEquals(simpleStatefulRemote.getValue(), 1);
         simpleStatefulRemote.finish();
+        assertEquals(simpleStatefulRemote.getValue(), 1);
+
+
 //        assertEquals(simpleStatefulRemote.getValue(), 0);
     }
 }
