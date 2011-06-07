@@ -14,4 +14,6 @@ public interface Authorization
     String getLogin();
 
     boolean isAuthenticated();
+
+    String getSessionId();
 }

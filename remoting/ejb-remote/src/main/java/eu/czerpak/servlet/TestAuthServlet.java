@@ -19,8 +19,9 @@ import java.io.PrintWriter;
  * Time: 8:45 PM
  * To change this template use File | Settings | File Templates.
  */
-@WebServlet(urlPatterns = "/test")
-public class TestServlet extends HttpServlet
+@WebServlet(urlPatterns = "/testAuth")
+public class TestAuthServlet
+        extends HttpServlet
 {
     public static final String LOGIN_KEY = "login";
     private int counter = 0;

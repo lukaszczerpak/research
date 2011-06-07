@@ -39,12 +39,14 @@ public class SimpleMultipleSessionHessianTest
         urlSimpleSessionHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleSessionHessian";
         urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/AuthHessian";
 
-        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
+//        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
+        CookieHandler.setDefault(new My2CookieManager());
 //        factory = new HessianProxyFactory();
         System.out.println("INIT");
     }
 
-    @Test(threadPoolSize = 100, invocationCount = 200)
+    @Test(threadPoolSize = 100, invocationCount = 100)
+//    @Test(invocationCount = 2)
     public void testMultipleSessions() throws Exception
     {
         HessianProxyFactory factory = new HessianProxyFactory();

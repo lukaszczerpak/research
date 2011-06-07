@@ -26,6 +26,6 @@ public class SimpleSessionEJB implements SimpleSessionRemote
             return "";
         }
 
-        return "Hello, " + authBean.getLogin();
+        return "Hello, " + authBean.getLogin() + " (" + authBean.getSessionId() + ")";
     }
 }

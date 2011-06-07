@@ -9,7 +9,8 @@ import java.util.Properties;
 public class StaticConfig
 {
     static {
-        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
+//        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
+        CookieHandler.setDefault(new My2CookieManager());
 
         Properties cfg = new Properties();
         try {
@@ -19,8 +20,17 @@ public class StaticConfig
             throw new RuntimeException(e);
         }
 
-        urlSimpleSessionHessian = "http://" + cfg.getProperty("glassfish.remote.hostname") + ":8080/" + cfg.getProperty("module.name") + "/SimpleSessionHessian";
-        urlAuthHessian = "http://" + cfg.getProperty("glassfish.remote.hostname") + ":8080/" + cfg.getProperty("module.name") + "/AuthHessian";
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://").append(cfg.getProperty("glassfish.remote.hostname")).append(":8080/");
+        sb.append(cfg.getProperty("module.name")).append("-").append(cfg.getProperty("module.version"));
+        sb.append("/SimpleSessionHessian");
+        urlSimpleSessionHessian = sb.toString();
+
+        sb = new StringBuilder();
+        sb.append("http://").append(cfg.getProperty("glassfish.remote.hostname")).append(":8080/");
+        sb.append(cfg.getProperty("module.name")).append("-").append(cfg.getProperty("module.version"));
+        sb.append("/AuthHessian");
+        urlAuthHessian = sb.toString();
     }
 
     private static String urlSimpleSessionHessian;

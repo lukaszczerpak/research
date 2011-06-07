@@ -14,11 +14,13 @@ import java.io.Serializable;
 public class AuthBean implements Serializable
 {
     private String login;
+    private String sessionId;
     private boolean authenticated;
 
-    public void auth(String login, String password)
+    public void auth(String login, String password, String sessionId)
     {
         this.login = login;
+        this.sessionId = sessionId;
         this.authenticated = true;
     }
 
@@ -30,5 +32,10 @@ public class AuthBean implements Serializable
     public boolean isAuthenticated()
     {
         return authenticated;
+    }
+
+    public String getSessionId()
+    {
+        return sessionId;
     }
 }
