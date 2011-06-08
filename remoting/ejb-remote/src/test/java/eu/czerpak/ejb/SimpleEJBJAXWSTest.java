@@ -8,8 +8,6 @@ import org.perf4j.log4j.Log4JStopWatch;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Properties;
-
 /**
  * Created by IntelliJ IDEA.
  * User: lukes
@@ -26,13 +24,10 @@ public class SimpleEJBJAXWSTest
     public void setUp() throws Exception
     {
         Logger rootLogger = Logger.getRootLogger();
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
         stopWatch = new Log4JStopWatch("JAXWS - create proxy");
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(SimpleRemote.class);
-        factory.setAddress("http://" + config.getProperty("glassfish.remote.hostname") + ":8080/SimpleEJB/SimpleEJB");
+        factory.setAddress("http://127.0.0.1:8080/SimpleEJB/SimpleEJB");
         simpleRemote = (SimpleRemote) factory.create();
         stopWatch.stop();
     }

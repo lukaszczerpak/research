@@ -1,16 +1,15 @@
 package eu.czerpak.servlet;
 
+import eu.czerpak.hessian.client.HessianConversationProxyFactory;
 import eu.czerpak.service.SimpleStatefulRemote;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import eu.czerpak.hessian.client.*;
 import javax.naming.NamingException;
 import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -29,13 +28,10 @@ public class SimpleStatefulHessianTest
     @BeforeTest
     public void initConfig() throws IOException, NamingException
     {
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
         CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
         HessianConversationProxyFactory factory = new HessianConversationProxyFactory();
 
-        String url = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleStatefulHessian";
+        String url = "http://127.0.0.1:8080/ejb-remote/SimpleStatefulHessian";
         simpleStatefulRemote = (SimpleStatefulRemote) factory.create(SimpleStatefulRemote.class, url);
         assertNotNull(simpleStatefulRemote);
     }
@@ -47,9 +43,8 @@ public class SimpleStatefulHessianTest
         simpleStatefulRemote.increment();
         assertEquals(simpleStatefulRemote.getValue(), 1);
         simpleStatefulRemote.finish();
-        assertEquals(simpleStatefulRemote.getValue(), 1);
 
-
-//        assertEquals(simpleStatefulRemote.getValue(), 0);
+        assertEquals(simpleStatefulRemote.getValue(), 0);
+        simpleStatefulRemote.finish();
     }
 }

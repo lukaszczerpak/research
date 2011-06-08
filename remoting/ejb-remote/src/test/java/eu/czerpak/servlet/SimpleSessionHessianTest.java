@@ -13,7 +13,6 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.MalformedURLException;
-import java.util.Properties;
 
 import static org.testng.Assert.*;
 
@@ -35,11 +34,8 @@ public class SimpleSessionHessianTest
     public void initConfig()
             throws IOException, NamingException
     {
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
-        urlSimpleSessionHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleSessionHessian";
-        urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/LogonHessian";
+        urlSimpleSessionHessian = "http://127.0.0.1:8080/ejb-remote/SimpleSessionHessian";
+        urlAuthHessian = "http://127.0.0.1:8080/ejb-remote/LogonHessian";
     }
 
     @BeforeGroups({"withSession"})
@@ -83,7 +79,7 @@ public class SimpleSessionHessianTest
     public void testAuthWithoutSession()
             throws Exception
     {
-        authorization.login("lukes", "dupa");
+        authorization.login("lukes", "password");
 
         String value = simpleRemote.sayHello();
         assertNotNull(value);
@@ -94,7 +90,7 @@ public class SimpleSessionHessianTest
     public void testAuthWithSession()
             throws Exception
     {
-        authorization.login("lukes", "dupa");
+        authorization.login("lukes", "password");
 
         String value = simpleRemote.sayHello();
         assertNotNull(value);

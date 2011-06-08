@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import static org.testng.Assert.assertNotNull;
 
@@ -29,11 +28,8 @@ public class SimpleHessianTest
     public void initProxy() throws IOException
     {
         Logger rootLogger = Logger.getRootLogger();
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
         stopWatch = new Log4JStopWatch("Hessian - create proxy");
-        String url = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleHessian";
+        String url = "http://127.0.0.1:8080/ejb-remote/SimpleHessian";
         HessianProxyFactory factory = new HessianProxyFactory();
         simpleRemote = (SimpleRemote) factory.create(SimpleRemote.class, url);
         stopWatch.stop();

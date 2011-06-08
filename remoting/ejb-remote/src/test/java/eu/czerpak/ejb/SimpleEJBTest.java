@@ -26,12 +26,9 @@ public class SimpleEJBTest
     public void setUp() throws Exception
     {
         Logger rootLogger = Logger.getRootLogger();
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
         Properties p = new Properties();
         p.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.SerialInitContextFactory");
-        p.setProperty("org.omg.CORBA.ORBInitialHost", config.getProperty("glassfish.remote.hostname"));
+        p.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
         p.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
 
         stopWatch = new Log4JStopWatch("EJB - initialContext");
@@ -39,7 +36,7 @@ public class SimpleEJBTest
         stopWatch.stop();
 
         stopWatch.start("EJB - SimpleEJB lookup");
-        simpleRemote = (SimpleRemote) ctx.lookup("java:global/" + config.getProperty("module.name") + "/SimpleEJB");
+        simpleRemote = (SimpleRemote) ctx.lookup("java:global/ejb-remote/SimpleEJB");
         stopWatch.stop();
     }
 

@@ -20,7 +20,6 @@
     <modules>
         <module>common</module>
         <module>ejb-remote</module>
-        <module>webclient</module>
     </modules>
 
     <properties>
@@ -61,6 +60,12 @@
             <dependency>
                 <groupId>org.glassfish.appclient</groupId>
                 <artifactId>gf-client</artifactId>
+                <version>${glassfish.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
                 <version>${glassfish.version}</version>
             </dependency>
 

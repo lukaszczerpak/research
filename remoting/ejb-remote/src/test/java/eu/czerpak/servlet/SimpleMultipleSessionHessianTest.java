@@ -14,7 +14,6 @@ import java.net.CookiePolicy;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -67,15 +66,12 @@ public class SimpleMultipleSessionHessianTest
     public void initConfig()
             throws IOException, NamingException
     {
-        Properties config = new Properties();
-        config.load(this.getClass().getResourceAsStream("/test.properties"));
-
-        urlSimpleSessionHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleSessionHessian";
-        urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/LogonHessian";
+        urlSimpleSessionHessian = "http://127.0.0.1:8080/ejb-remote/SimpleSessionHessian";
+        urlAuthHessian = "http://127.0.0.1:8080/ejb-remote/LogonHessian";
 
 //        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
-        CookieHandler.setDefault(new My2CookieManager());
-//        CookieHandler.setDefault(cookieHandler);
+//        CookieHandler.setDefault(new MTCookieManager());
+        CookieHandler.setDefault(cookieHandler);
         factory = new HessianProxyFactory();
         System.out.println("INIT");
     }
@@ -87,18 +83,18 @@ public class SimpleMultipleSessionHessianTest
         SimpleSessionRemote simpleRemote = (SimpleSessionRemote) factory.create(SimpleSessionRemote.class, urlSimpleSessionHessian);
         LogonRemote authorization = (LogonRemote) factory.create(LogonRemote.class, urlAuthHessian);
 
-        Thread.sleep((int)(Math.random()*5000));
+        Thread.sleep((int) (Math.random() * 5000));
 
         String threadName = Thread.currentThread().getName();
-        authorization.login(threadName, "dupa");
+        authorization.login(threadName, "password");
 
-        Thread.sleep((int)(Math.random()*5000));
+        Thread.sleep((int) (Math.random() * 5000));
 
         String value = simpleRemote.sayHello();
         System.out.println("THREAD NAME: " + threadName + "   VALUE: " + value);
         assertNotNull(value);
         assertTrue(value.contains(threadName));
 
-        Thread.sleep((int)(Math.random()*5000));
+        Thread.sleep((int) (Math.random() * 5000));
     }
 }

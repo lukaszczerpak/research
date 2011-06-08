@@ -5,6 +5,7 @@ import com.caucho.services.server.ServiceContext;
 import eu.czerpak.bean.LoginBean;
 import eu.czerpak.service.LogonRemote;
 
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,24 +17,25 @@ public class LogonHessian
         implements LogonRemote
 {
     @Inject
-    LoginBean loginBean;
+    Instance<LoginBean> loginBean;
 
     @Override
     public void login(String login, String password)
     {
-        if (loginBean.isAuthenticated()) {
+        LoginBean bean = loginBean.get();
+        if (bean.isAuthenticated()) {
             throw new IllegalStateException("PROBA PODWOJNEGO LOGOWANIA");
         }
 
         HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
         HttpSession session = request.getSession();
 
-        loginBean.login(login, password, session.getId());
+        bean.login(login, password, session.getId());
     }
 
     @Override
     public void logout()
     {
-        loginBean.logout();
+        loginBean.get().logout();
     }
 }

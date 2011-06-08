@@ -16,9 +16,6 @@ import javax.servlet.http.HttpSession;
 public class SfsbHessianServlet
         extends HessianServlet
 {
-    // TODO remove MODULE_NAME or do something with that
-    private static final String MODULE_NAME = "ejb-remote-1.0";
-
     protected <T> T getReference(Class<T> c)
     {
         HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
@@ -40,7 +37,6 @@ public class SfsbHessianServlet
         if (o == null) {
             try {
                 InitialContext ic = new InitialContext();
-//                o = ic.lookup("java:global/" + MODULE_NAME + "/" + c.getName());
                 o = ic.lookup(c.getName());
                 session.setAttribute(sfsbKey, o);
             }

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author lukes
  */
-public class My2CookieManager
+public class MTCookieManager
         extends CookieHandler
 {
     static ThreadLocal<CookieManager> threadLocal = new ThreadLocal<CookieManager>()

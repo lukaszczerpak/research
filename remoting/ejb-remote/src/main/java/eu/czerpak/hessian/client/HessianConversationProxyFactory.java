@@ -21,7 +21,6 @@ public class HessianConversationProxyFactory
     public Object create(Class<?> api, String urlName, ClassLoader loader)
             throws MalformedURLException
     {
-        System.out.println(urlName);
         return super.create(api, appendUUID(urlName), loader);
     }
 }

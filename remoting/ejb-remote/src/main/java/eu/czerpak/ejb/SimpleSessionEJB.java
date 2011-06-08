@@ -24,10 +24,12 @@ public class SimpleSessionEJB
     @Override
     public String sayHello()
     {
-        if (authBean == null) {
+        UserSession userSession = authBean.get();
+
+        if (userSession == null) {
             return "";
         }
 
-        return "Hello, " + authBean.get().getLogin() + " (" + authBean.get().getSessionId() + ")";
+        return "Hello, " + userSession.getLogin() + " (" + userSession.getSessionId() + ")";
     }
 }
