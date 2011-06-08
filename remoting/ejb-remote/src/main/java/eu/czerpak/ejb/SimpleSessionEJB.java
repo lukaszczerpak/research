@@ -1,6 +1,6 @@
 package eu.czerpak.ejb;
 
-import eu.czerpak.service.Authorization;
+import eu.czerpak.bean.AuthBean;
 import eu.czerpak.service.SimpleSessionRemote;
 
 import javax.ejb.Stateless;
@@ -14,10 +14,11 @@ import javax.inject.Inject;
  * To change this template use File | Settings | File Templates.
  */
 @Stateless
-public class SimpleSessionEJB implements SimpleSessionRemote
+public class SimpleSessionEJB
+        implements SimpleSessionRemote
 {
     @Inject
-    Authorization authBean;
+    AuthBean authBean;
 
     @Override
     public String sayHello()
