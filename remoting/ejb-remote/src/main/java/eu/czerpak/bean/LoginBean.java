@@ -32,7 +32,6 @@ public class LoginBean
     }
 
     @Produces
-    @Dependent
     public UserSession getUserSession()
     {
         return userSession;
