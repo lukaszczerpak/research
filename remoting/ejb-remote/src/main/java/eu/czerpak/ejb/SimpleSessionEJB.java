@@ -4,6 +4,7 @@ import eu.czerpak.model.UserSession;
 import eu.czerpak.service.SimpleSessionRemote;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 /**
@@ -18,7 +19,7 @@ public class SimpleSessionEJB
         implements SimpleSessionRemote
 {
     @Inject
-    UserSession authBean;
+    Instance<UserSession> authBean;
 
     @Override
     public String sayHello()
@@ -27,6 +28,6 @@ public class SimpleSessionEJB
             return "";
         }
 
-        return "Hello, " + authBean.getLogin() + " (" + authBean.getSessionId() + ")";
+        return "Hello, " + authBean.get().getLogin() + " (" + authBean.get().getSessionId() + ")";
     }
 }

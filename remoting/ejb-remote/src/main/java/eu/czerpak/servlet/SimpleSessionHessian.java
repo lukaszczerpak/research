@@ -4,6 +4,7 @@ import com.caucho.hessian.server.HessianServlet;
 import eu.czerpak.service.SimpleSessionRemote;
 
 import javax.ejb.EJB;
+import javax.servlet.annotation.WebServlet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +13,10 @@ import javax.ejb.EJB;
  * Time: 8:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SimpleSessionHessian extends HessianServlet implements SimpleSessionRemote
+@WebServlet(urlPatterns = "/SimpleSessionHessian")
+public class SimpleSessionHessian
+        extends HessianServlet
+        implements SimpleSessionRemote
 {
     @EJB
     SimpleSessionRemote simpleSessionRemote;

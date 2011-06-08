@@ -74,8 +74,8 @@ public class SimpleMultipleSessionHessianTest
         urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/LogonHessian";
 
 //        CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
-//        CookieHandler.setDefault(new My2CookieManager());
-        CookieHandler.setDefault(cookieHandler);
+        CookieHandler.setDefault(new My2CookieManager());
+//        CookieHandler.setDefault(cookieHandler);
         factory = new HessianProxyFactory();
         System.out.println("INIT");
     }
@@ -87,12 +87,18 @@ public class SimpleMultipleSessionHessianTest
         SimpleSessionRemote simpleRemote = (SimpleSessionRemote) factory.create(SimpleSessionRemote.class, urlSimpleSessionHessian);
         LogonRemote authorization = (LogonRemote) factory.create(LogonRemote.class, urlAuthHessian);
 
+        Thread.sleep((int)(Math.random()*5000));
+
         String threadName = Thread.currentThread().getName();
         authorization.login(threadName, "dupa");
+
+        Thread.sleep((int)(Math.random()*5000));
 
         String value = simpleRemote.sayHello();
         System.out.println("THREAD NAME: " + threadName + "   VALUE: " + value);
         assertNotNull(value);
         assertTrue(value.contains(threadName));
+
+        Thread.sleep((int)(Math.random()*5000));
     }
 }

@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * @author lukes
  */
-public class UserSession implements Serializable
+public class UserSession
+        implements Serializable
 {
     private String login;
     private String password;

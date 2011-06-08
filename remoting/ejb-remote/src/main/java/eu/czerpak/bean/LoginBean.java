@@ -2,7 +2,7 @@ package eu.czerpak.bean;
 
 import eu.czerpak.model.UserSession;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import java.io.Serializable;
@@ -11,7 +11,8 @@ import java.io.Serializable;
  * @author lukes
  */
 @SessionScoped
-public class LoginBean implements Serializable
+public class LoginBean
+        implements Serializable
 {
     private UserSession userSession;
 
@@ -31,6 +32,7 @@ public class LoginBean implements Serializable
     }
 
     @Produces
+    @Dependent
     public UserSession getUserSession()
     {
         return userSession;
