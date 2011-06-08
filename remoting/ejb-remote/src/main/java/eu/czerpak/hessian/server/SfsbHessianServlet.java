@@ -2,8 +2,6 @@ package eu.czerpak.hessian.server;
 
 import com.caucho.hessian.server.HessianServlet;
 import com.caucho.services.server.ServiceContext;
-import eu.czerpak.ejb.SimpleStatefulEJB;
-import eu.czerpak.ejb.SimpleStatefulRemote;
 import org.apache.commons.lang.StringUtils;
 
 import javax.ejb.EJBException;

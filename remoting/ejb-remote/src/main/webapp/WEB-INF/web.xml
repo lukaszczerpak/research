@@ -3,14 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <servlet>
-        <servlet-name>SimpleHessian</servlet-name>
-        <servlet-class>eu.czerpak.servlet.SimpleHessian</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SimpleHessian</servlet-name>
-        <url-pattern>/SimpleHessian</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>SimpleSessionHessian</servlet-name>
@@ -28,14 +20,5 @@
     <servlet-mapping>
         <servlet-name>SimpleStatefulHessian</servlet-name>
         <url-pattern>/SimpleStatefulHessian</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AuthHessian</servlet-name>
-        <servlet-class>eu.czerpak.servlet.AuthHessian</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AuthHessian</servlet-name>
-        <url-pattern>/AuthHessian</url-pattern>
     </servlet-mapping>
 </web-app>

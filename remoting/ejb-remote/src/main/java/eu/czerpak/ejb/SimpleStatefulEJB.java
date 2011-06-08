@@ -1,9 +1,9 @@
 package eu.czerpak.ejb;
 
-import javax.annotation.PostConstruct;
+import eu.czerpak.service.SimpleStatefulRemote;
+
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.servlet.ServletContext;
 
 /**
  * Created by IntelliJ IDEA.

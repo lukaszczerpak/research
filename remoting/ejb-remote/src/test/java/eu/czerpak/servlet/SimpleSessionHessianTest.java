@@ -1,7 +1,7 @@
 package eu.czerpak.servlet;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import eu.czerpak.service.Authorization;
+import eu.czerpak.service.LogonRemote;
 import eu.czerpak.service.SimpleSessionRemote;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeTest;
@@ -27,22 +27,24 @@ import static org.testng.Assert.*;
 public class SimpleSessionHessianTest
 {
     private SimpleSessionRemote simpleRemote;
-    private Authorization authorization;
+    private LogonRemote authorization;
     private String urlSimpleSessionHessian;
     private String urlAuthHessian;
 
     @BeforeTest
-    public void initConfig() throws IOException, NamingException
+    public void initConfig()
+            throws IOException, NamingException
     {
         Properties config = new Properties();
         config.load(this.getClass().getResourceAsStream("/test.properties"));
 
         urlSimpleSessionHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/SimpleSessionHessian";
-        urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/AuthHessian";
+        urlAuthHessian = "http://" + config.getProperty("glassfish.remote.hostname") + ":8080/" + config.getProperty("module.name") + "/LogonHessian";
     }
 
     @BeforeGroups({"withSession"})
-    public void initProxyWithSession() throws MalformedURLException
+    public void initProxyWithSession()
+            throws MalformedURLException
     {
         CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
         HessianProxyFactory factory = new HessianProxyFactory();
@@ -50,12 +52,13 @@ public class SimpleSessionHessianTest
         simpleRemote = (SimpleSessionRemote) factory.create(SimpleSessionRemote.class, urlSimpleSessionHessian);
         assertNotNull(simpleRemote);
 
-        authorization = (Authorization) factory.create(Authorization.class, urlAuthHessian);
+        authorization = (LogonRemote) factory.create(LogonRemote.class, urlAuthHessian);
         assertNotNull(authorization);
     }
 
     @BeforeGroups({"withoutSession"})
-    public void initProxyWithoutSession() throws MalformedURLException
+    public void initProxyWithoutSession()
+            throws MalformedURLException
     {
         CookieHandler.setDefault(null);
         HessianProxyFactory factory = new HessianProxyFactory();
@@ -63,12 +66,13 @@ public class SimpleSessionHessianTest
         simpleRemote = (SimpleSessionRemote) factory.create(SimpleSessionRemote.class, urlSimpleSessionHessian);
         assertNotNull(simpleRemote);
 
-        authorization = (Authorization) factory.create(Authorization.class, urlAuthHessian);
+        authorization = (LogonRemote) factory.create(LogonRemote.class, urlAuthHessian);
         assertNotNull(authorization);
     }
 
     @Test(groups = {"withoutSession"})
-    public void testSayHello() throws Exception
+    public void testSayHello()
+            throws Exception
     {
         String value = simpleRemote.sayHello();
         assertNotNull(value);
@@ -76,9 +80,10 @@ public class SimpleSessionHessianTest
     }
 
     @Test(groups = {"withoutSession"})
-    public void testAuthWithoutSession() throws Exception
+    public void testAuthWithoutSession()
+            throws Exception
     {
-        authorization.auth("lukes", "dupa");
+        authorization.login("lukes", "dupa");
 
         String value = simpleRemote.sayHello();
         assertNotNull(value);
@@ -86,9 +91,10 @@ public class SimpleSessionHessianTest
     }
 
     @Test(groups = {"withSession"})
-    public void testAuthWithSession() throws Exception
+    public void testAuthWithSession()
+            throws Exception
     {
-        authorization.auth("lukes", "dupa");
+        authorization.login("lukes", "dupa");
 
         String value = simpleRemote.sayHello();
         assertNotNull(value);

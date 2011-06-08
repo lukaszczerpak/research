@@ -1,7 +1,6 @@
 package eu.czerpak.servlet;
 
-import eu.czerpak.ejb.SimpleStatefulEJB;
-import eu.czerpak.ejb.SimpleStatefulRemote;
+import eu.czerpak.service.SimpleStatefulRemote;
 import eu.czerpak.hessian.server.SfsbHessianServlet;
 
 /**

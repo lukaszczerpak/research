@@ -1,7 +1,6 @@
 package eu.czerpak.servlet;
 
-import com.caucho.hessian.client.HessianProxyFactory;
-import eu.czerpak.ejb.SimpleStatefulRemote;
+import eu.czerpak.service.SimpleStatefulRemote;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

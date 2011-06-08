@@ -1,4 +1,4 @@
-package eu.czerpak.ejb;
+package eu.czerpak.service;
 
 import javax.ejb.Remote;
 import javax.ejb.Remove;

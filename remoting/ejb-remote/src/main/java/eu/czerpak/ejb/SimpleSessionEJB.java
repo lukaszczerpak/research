@@ -1,6 +1,6 @@
 package eu.czerpak.ejb;
 
-import eu.czerpak.bean.AuthBean;
+import eu.czerpak.model.UserSession;
 import eu.czerpak.service.SimpleSessionRemote;
 
 import javax.ejb.Stateless;
@@ -18,12 +18,12 @@ public class SimpleSessionEJB
         implements SimpleSessionRemote
 {
     @Inject
-    AuthBean authBean;
+    UserSession authBean;
 
     @Override
     public String sayHello()
     {
-        if (!authBean.isAuthenticated()) {
+        if (authBean == null) {
             return "";
         }
 

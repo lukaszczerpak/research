@@ -5,6 +5,7 @@ import eu.czerpak.model.MyObject;
 import eu.czerpak.service.SimpleRemote;
 
 import javax.ejb.EJB;
+import javax.servlet.annotation.WebServlet;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
  * Time: 8:37 PM
  * To change this template use File | Settings | File Templates.
  */
+@WebServlet(urlPatterns = "/SimpleHessian")
 public class SimpleHessian extends HessianServlet implements SimpleRemote
 {
     @EJB
