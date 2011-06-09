@@ -19,12 +19,12 @@ public class SimpleSessionEJB
         implements SimpleSessionRemote
 {
     @Inject
-    Instance<UserSession> authBean;
+    private Instance<UserSession> userSessionSource;
 
     @Override
     public String sayHello()
     {
-        UserSession userSession = authBean.get();
+        UserSession userSession = userSessionSource.get();
 
         if (userSession == null) {
             return "";
@@ -32,4 +32,11 @@ public class SimpleSessionEJB
 
         return "Hello, " + userSession.getLogin() + " (" + userSession.getSessionId() + ")";
     }
+
+    @Override
+    public String sayHello(String name)
+    {
+        return "Hello, " + name;
+    }
+
 }

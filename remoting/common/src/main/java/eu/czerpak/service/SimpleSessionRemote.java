@@ -13,4 +13,6 @@ import javax.ejb.Remote;
 public interface SimpleSessionRemote
 {
     String sayHello();
+
+    String sayHello(String name);
 }

@@ -26,4 +26,10 @@ public class SimpleSessionHessian
     {
         return simpleSessionRemote.sayHello();
     }
+
+    @Override
+    public String sayHello(String name)
+    {
+        return simpleSessionRemote.sayHello(name);
+    }
 }
