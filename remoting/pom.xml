@@ -44,6 +44,10 @@
 
     <pluginRepositories>
         <pluginRepository>
+            <id>caucho</id>
+            <url>http://caucho.com/m2</url>
+        </pluginRepository>
+        <pluginRepository>
             <id>glassfish</id>
             <url>http://download.java.net/maven/glassfish</url>
         </pluginRepository>

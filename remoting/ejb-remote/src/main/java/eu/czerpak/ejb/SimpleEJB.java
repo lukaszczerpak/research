@@ -5,7 +5,6 @@ import eu.czerpak.model.MyObjectListHolder;
 import eu.czerpak.service.SimpleRemote;
 
 import javax.ejb.Stateless;
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.List;
 
@@ -29,12 +28,17 @@ public class SimpleEJB implements SimpleRemote
     @Override
     public List<MyObject> getMyObjectList(int size)
     {
-        switch(size) {
-            case 10: return MyObjectListHolder.getInstance().getList10();
-            case 100: return MyObjectListHolder.getInstance().getList100();
-            case 500: return MyObjectListHolder.getInstance().getList500();
-            case 1000: return MyObjectListHolder.getInstance().getList1000();
-            default: throw new IllegalArgumentException();
+        switch (size) {
+            case 10:
+                return MyObjectListHolder.getInstance().getList10();
+            case 100:
+                return MyObjectListHolder.getInstance().getList100();
+            case 500:
+                return MyObjectListHolder.getInstance().getList500();
+            case 1000:
+                return MyObjectListHolder.getInstance().getList1000();
+            default:
+                throw new IllegalArgumentException();
         }
     }
 }
