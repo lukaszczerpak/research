@@ -91,4 +91,15 @@
         </plugins>
     </build>
 
+
+    <repositories>
+        <repository>
+            <id>glassfish</id>
+            <url>http://download.java.net/maven/glassfish</url>
+        </repository>
+        <repository>
+            <id>java-net</id>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+    </repositories>
 </project>
