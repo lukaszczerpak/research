@@ -1,4 +1,4 @@
-package eu.czerpak.servlet;
+package eu.czerpak.hessian.server;
 
 import com.caucho.hessian.client.HessianProxyFactory;
 import eu.czerpak.service.SimpleRemote;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertNotNull;
 
-public class SimpleDynamicHessianTest
+public class SimpleDynamicStatelessHessianTest
 {
     private SimpleRemote simpleRemote;
     private StopWatch stopWatch;

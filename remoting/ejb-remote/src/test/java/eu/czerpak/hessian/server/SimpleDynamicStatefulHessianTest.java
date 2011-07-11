@@ -1,4 +1,4 @@
-package eu.czerpak.servlet;
+package eu.czerpak.hessian.server;
 
 import eu.czerpak.hessian.client.HessianConversationProxyFactory;
 import eu.czerpak.service.SimpleStatefulRemote;
@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNotNull;
  * Time: 7:22 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SimpleStatefulHessianTest
+public class SimpleDynamicStatefulHessianTest
 {
     private SimpleStatefulRemote simpleStatefulRemote;
 
@@ -31,7 +31,7 @@ public class SimpleStatefulHessianTest
         CookieHandler.setDefault(new CookieManager(null /*=default in-memory store*/, CookiePolicy.ACCEPT_ALL));
         HessianConversationProxyFactory factory = new HessianConversationProxyFactory();
 
-        String url = "http://127.0.0.1:8080/ejb-remote/SimpleStatefulHessian";
+        String url = "http://127.0.0.1:8080/ejb-remote/dynamic-stateful/eu.czerpak.service.SimpleStatefulRemote";
         simpleStatefulRemote = (SimpleStatefulRemote) factory.create(SimpleStatefulRemote.class, url);
         assertNotNull(simpleStatefulRemote);
     }

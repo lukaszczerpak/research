@@ -1,22 +1,23 @@
 package eu.czerpak.hessian.server;
 
-import com.caucho.hessian.server.HessianServlet;
 import com.caucho.services.server.ServiceContext;
 import org.apache.commons.lang.StringUtils;
 
 import javax.ejb.EJBException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
  * @author lukes
  */
-public class SfsbHessianServlet
-        extends HessianServlet
+@WebServlet(urlPatterns = "/dynamic-stateful/*")
+public class DynamicStatefulHessianServlet
+        extends DynamicHessianServlet
 {
-    protected <T> T getReference(Class<T> c)
+    protected Object getReference(String serviceId)
     {
         HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
         HttpSession session = request.getSession();
@@ -28,7 +29,7 @@ public class SfsbHessianServlet
         }
 
         // unique SFSB instance key
-        String sfsbKey = c.getSimpleName() + "-" + cid;
+        String sfsbKey = serviceId + "-" + cid;
         System.out.println(sfsbKey);
 
         // trying to retrieve instance related with cid
@@ -37,17 +38,17 @@ public class SfsbHessianServlet
         if (o == null) {
             try {
                 InitialContext ic = new InitialContext();
-                o = ic.lookup(c.getName());
+                o = ic.lookup(serviceId);
                 session.setAttribute(sfsbKey, o);
             }
             catch (NamingException e) {
                 throw new EJBException(e);
             }
         }
-        return (T) o;
+        return o;
     }
 
-    protected void removeReference(Class c)
+    protected void removeReference(String serviceId)
     {
         HttpServletRequest request = (HttpServletRequest) ServiceContext.getContextRequest();
         HttpSession session = request.getSession();
@@ -59,7 +60,7 @@ public class SfsbHessianServlet
         }
 
         // unique SFSB instance key
-        String sfsbKey = c.getSimpleName() + "-" + cid;
+        String sfsbKey = serviceId + "-" + cid;
 
         session.removeAttribute(sfsbKey);
     }

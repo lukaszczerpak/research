@@ -132,10 +132,16 @@ public abstract class DynamicHessianServlet
             SerializerFactory serializerFactory = getSerializerFactory();
             Class clazz = loadClass(serviceId);
             Object service = getReference(serviceId);
-            _homeSkeleton = new HessianSkeleton(service, clazz);
+            _homeSkeleton = new ExtendedHessianSkeleton(service, clazz);
             _homeSkeleton.invoke(is, os, serializerFactory);
+            if (((ExtendedHessianSkeleton) _homeSkeleton).isRemoved()) {
+                removeReference(serviceId);
+            }
         }
         catch (RuntimeException e) {
+            if (((ExtendedHessianSkeleton) _homeSkeleton).isRemoved()) {
+                removeReference(serviceId);
+            }
             throw e;
         }
         catch (ServletException e) {
@@ -152,6 +158,7 @@ public abstract class DynamicHessianServlet
     protected abstract Object getReference(String serviceId)
             throws NamingException;
 
+    protected abstract void removeReference(String serviceId);
 
     private void dumpDebug(HttpServletRequest req, String serviceId, String objectId, ServletRequest request)
     {

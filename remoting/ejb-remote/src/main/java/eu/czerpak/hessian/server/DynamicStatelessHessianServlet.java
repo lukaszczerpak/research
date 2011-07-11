@@ -1,4 +1,4 @@
-package eu.czerpak.servlet;
+package eu.czerpak.hessian.server;
 
 import eu.czerpak.hessian.server.DynamicHessianServlet;
 
@@ -19,5 +19,10 @@ public class DynamicStatelessHessianServlet
     {
         InitialContext ctx = new InitialContext();
         return ctx.lookup(serviceId);
+    }
+
+    @Override
+    protected void removeReference(String serviceId)
+    {
     }
 }
