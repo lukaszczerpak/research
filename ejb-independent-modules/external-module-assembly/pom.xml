@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>eu.czerpak</groupId>
+        <artifactId>ejb-indepmod-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>eu.czerpak</groupId>
+    <artifactId>external-module-assembly</artifactId>
+    <packaging>ear</packaging>
+
+    <build>
+        <finalName>external-module-${project.version}</finalName>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <generateClient>false</generateClient>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                    <modules>
+                        <ejbModule>
+                            <groupId>eu.czerpak</groupId>
+                            <artifactId>external-module</artifactId>
+                            <bundleFileName>external-module.jar</bundleFileName>
+                        </ejbModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>eu.czerpak</groupId>
+            <artifactId>external-module</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+        </dependency>
+    </dependencies>
+
+</project>
