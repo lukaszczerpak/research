@@ -19,7 +19,9 @@
     <modules>
         <module>external-module-api</module>
         <module>external-module</module>
+        <module>external-module2</module>
         <module>external-module-assembly</module>
+        <module>external-module2-assembly</module>
         <module>webclient</module>
     </modules>
 
@@ -50,6 +52,11 @@
                     <configuration>
                         <ejbVersion>3.0</ejbVersion>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.6</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
