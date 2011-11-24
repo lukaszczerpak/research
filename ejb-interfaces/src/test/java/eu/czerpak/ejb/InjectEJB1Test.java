@@ -16,18 +16,24 @@ public class InjectEJB1Test
 
     @EJB
     Simple2Local simple2Local;
-//    Simple2EJB simple2EJB;    // illegal
+
+    @EJB
+    Simple2EJB simple2EJB;    // illegal without @LocalBean annotation
 
     @EJB
     Simple3Remote simple3Remote;
-//    Simple3EJB simple3EJB;    // illegal
+
+    @EJB
+    Simple3EJB simple3EJB;    // illegal without @LocalBean annotation
 
     @EJB
     Simple4Local simple4Local;
 
     @EJB
     Simple4Remote simple4Remote;
-//    Simple4EJB simple4EJB;    // illegal
+
+    @EJB
+    Simple4EJB simple4EJB;    // illegal without @LocalBean annotation
 
 
     @Test
@@ -35,8 +41,11 @@ public class InjectEJB1Test
     {
         assertNotNull(simple1EJB.sayHello("abc"));
         assertNotNull(simple2Local.sayHello("abc"));
+        assertNotNull(simple2EJB.sayHello("abc"));
         assertNotNull(simple3Remote.sayHello("abc"));
+        assertNotNull(simple3EJB.sayHello("abc"));
         assertNotNull(simple4Local.sayHello("abc"));
         assertNotNull(simple4Remote.sayHello("abc"));
+        assertNotNull(simple4EJB.sayHello("abc"));
     }
 }
