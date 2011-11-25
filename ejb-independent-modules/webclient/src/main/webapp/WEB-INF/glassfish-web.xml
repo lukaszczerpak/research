@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
+<glassfish-web-app>
+
+ <ejb-ref>
+     <ejb-ref-name>SimpleRemote</ejb-ref-name>
+     <jndi-name>java:global/external-module2-1.0-SNAPSHOT/external-module2/SimpleV2Ejb</jndi-name>
+ </ejb-ref>
+
+ </glassfish-web-app>

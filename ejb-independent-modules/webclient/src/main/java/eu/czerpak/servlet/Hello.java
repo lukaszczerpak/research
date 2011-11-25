@@ -15,7 +15,8 @@ import java.io.PrintWriter;
 public class Hello extends HttpServlet
 {
     // @Inject annotation doesn't work, only @EJB
-    @EJB
+//    @EJB(lookup = "java:global/external-module2-1.0-SNAPSHOT/external-module2/SimpleV2Ejb")
+    @EJB(name = "SimpleRemote")
     SimpleRemote simpleRemote;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
